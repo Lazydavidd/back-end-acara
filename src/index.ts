@@ -6,54 +6,40 @@ import router from "./routes/api";
 
 import db from './utils/database';
 
+
 async function init() {
     try {
+        const result = await db();
 
-    const result= await db();
-    
-    console.log("database status:", result);
-    const app = express();
+        console.log("database status: ", result);
 
-    app.use(bodyParser.json());
+        const app = express();
 
-    const PORT = 3333;
+app.use(bodyParser.json());
 
-    app.get("/", (req, res) =>{
+const PORT = 3333;
 
-        res.status(200).json ({
-            
-        message: "Server is running",
 
-        data:null,
 
-        });
-        
-    })
+app.get("/", (req, res) => {
 
-    app.use("/api", router);
+  res.status(200).json({
 
-    //const app = express();
+    message: "Server Is Running",
 
-    //app.use(cors());
-    app.use(bodyParser.json());
+    data: null,
+  });
+});
 
-    app.get("/", (req, res) => {
-      res.status(200).json({
-        message: "Server is running",
-        data: null,
-      });
-    });
-   // docs(app);
+app.use("/api", router);
 
-    //app.use(errorMiddleware.serverRoute());
-    //app.use(errorMiddleware.serverError());
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
 
-    app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 init();
