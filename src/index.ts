@@ -43,9 +43,7 @@ async function init() {
         data: null,
       });
     });
-
-    app.use("/api", router);
-    // doc app
+   // docs(app);
 
     //app.use(errorMiddleware.serverRoute());
     //app.use(errorMiddleware.serverError());
