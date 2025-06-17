@@ -70,6 +70,13 @@ export default {
     // funtion login
     async login(req: Request, res: Response) {
 
+        /**
+         #swagger.requestBody = {
+            required: true,
+            schema: {$ref: "#/components/schemas/LoginRequest"}
+         }
+         */
+
                     const {
                         identifier,
                         password
@@ -130,6 +137,11 @@ export default {
   //disini irequser
    async me(req: IReqUser, res: Response){
 
+    /**
+     #swagger.security = [{
+        "bearerAuth": []
+     }]
+     */
         try {
 
             const user = req.user;
