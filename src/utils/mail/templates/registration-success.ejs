@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selamat Datang</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .header {
+      background-color: #4099d4;
+      color: #ffffff;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+      font-size: 16px;
+      color: #333333;
+      line-height: 1.5;
+    }
+
+    .content ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 25px;
+      margin: 20px 0;
+      background-color: #38af3c;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .footer {
+      background-color: #4099d4;
+      color: #ffffff;
+      padding: 12px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Selamat datang!</div>
+    <div class="content">
+      <p>Halo <%= username %>,</p>
+      <p>Terima kasih telah mendaftar di layanan kami. Berikut adalah informasi akun Anda:</p>
+      <ul>
+        <li><strong>Nama:</strong> <%= fullName %></li>
+        <li><strong>Email:</strong> <%= email %></li>
+        <li><strong>Tanggal Pendaftaran:</strong> <%= createdAt %></li>
+      </ul>
+
+      <p>Untuk memulai, silakan klik tombol di bawah ini:</p>
+
+      <p><a href="<%= activationLink %>" class="button">Aktifkan Akun</a></p>
+
+      <p>Jika Anda memiliki pertanyaan, jangan ragu untuk menghubungi kami.</p>
+      <p>Salam hangat,<br/>ACARA</p>
+    </div>
+    <div class="footer">
+      © 2025 ACARA Event Management System. Semua HAK dilindungi.
+    </div>
+  </div>
+</body>
+</html>
