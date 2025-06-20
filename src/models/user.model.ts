@@ -25,10 +25,12 @@ const userSchema = new schema<User>({
         username: {
             type: schema.Types.String,
             required: true,
+            unique: true,
         },
         email: {
             type: schema.Types.String,
             required: true,
+            unique: true,
         },
         password: {
             type: schema.Types.String,
@@ -63,6 +65,7 @@ userSchema.pre("save", function (next) {
     const user = this;
 
     user.password = encrypt(user.password);
+    user.activationCode = encrypt(user.id);
 
     next();
 
@@ -75,6 +78,7 @@ userSchema.post("save", async function(doc, next) {
     
       const user = doc;
     
+
     console.log("Send Email to:", user.email);
 
 const contentMail = await renderMailHtml("registration-success.ejs", {
@@ -82,10 +86,8 @@ const contentMail = await renderMailHtml("registration-success.ejs", {
     fullName: user.fullName,
     email: user.email,
     createdAt: user.createdAt,
-    activationLink: '${CLIENT_HOST}/auth/activation?code=${user.activationCode}',
+    activationLink: `${process.env.CLIENT_HOST}/auth/activation?code=${user.activationCode}`,
 });
-
-activationLink: `${process.env.CLIENT_HOST}/auth/activation?code=${user.activationCode}`
 
 
 await sendMail({

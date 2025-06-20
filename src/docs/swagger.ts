@@ -31,6 +31,16 @@ const doc = {
                 identifier: "dafaraihan",
                 password: "dafaraihan12",
             },
+            RegisterRequest: {
+            fullName: "dama akbar",
+            username: "dama2025",
+            email: "dama2025@yopmail.com",
+            password: "1234512345",
+            confirmPassword: "1234512345",
+            },
+            ActivationRequest:{
+                code: "abcdef"
+            },
         },
     },
 };
