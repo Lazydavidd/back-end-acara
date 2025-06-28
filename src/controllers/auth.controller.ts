@@ -1,19 +1,22 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
+import response from "../utils/response";
 
 import * as yup from "yup";
 
 import UserModel from "../models/user.model";
 import { encrypt } from "../utils/encryption";
 import { generateToken } from "../utils/jwt";
-import { IReqUser } from "../middlewares/auth.middleware";
+import { IReqUser } from "../utils/interfaces";
+import { ROLES } from "../utils/constant";
 
 type TRegister = {
-    fullName: string;
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
+  fullName: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 };
+
 
 type Tlogin = {
     identifier: string;
@@ -62,29 +65,22 @@ export default {
             username, 
             email, 
             password, 
-            confirmPassword, 
+            confirmPassword,
         });
 
+        if ('role' in req.body) delete req.body.role;
         const result = await UserModel.create({
             fullName, 
             username, 
             email, 
             password, 
+            role: ROLES.MEMBER,
         });
 
-    res.status(200).json({
-    message: "Registration successful",
-
-    data: result
-});
-
+    response.success(res, result, "success registration!");
+    
     } catch (error) {
-        const err = error as unknown as Error;
-
-        res.status(400).json({
-            message: err.message,
-            data: null,
-        });
+    response.error(res, error, "failed registration");
     }
     },
 
@@ -118,40 +114,24 @@ export default {
             });
 
             if (!userByIndentifier) {
-                return res.status(403).json ({
-                    message: "user not found",
-                data: null
-                });
-                
+                return response.unauthorized(res, "user not found");
             }
 
             //validasi password
             const validatePassword: boolean = encrypt(password) == userByIndentifier.password;
 
             if(!validatePassword) {
-                return res.status(403).json ({
-                    message: "user not found",
-                data: null
-                });
+                return response.unauthorized(res, "user not found");
             }
 
             const token = generateToken ({
                 id: userByIndentifier._id,
                 role: userByIndentifier.role,
+                profilePicture: userByIndentifier.profilePicture,
             });
-
-            res.status(200).json ({
-                message: "Login Success",
-                data: token,
-            });
-
+            response.success(res, token, "login success");
         } catch (error) {
-             const err = error as unknown as Error;
-
-        res.status(400).json({
-            message: err.message,
-            data: null,
-        });
+        response.error(res, error, "login failed");
         }
 
     },
@@ -171,18 +151,10 @@ export default {
 
             const result = await UserModel.findById(user?.id);
 
-           res.status(200).json({
-            message: "Success Login User Profile",
-            data: result,
-        });  
+         response.success(res, result, "success get user profile");
 
         } catch (error) {
-          const err = error as unknown as Error;
-
-        res.status(400).json({
-            message: err.message,
-            data: null,
-        });  
+        response.error(res, error, "failed get user profile");
         }
         
     },
@@ -211,18 +183,9 @@ export default {
                 new: true,
             }
         );
-        res.status(200).json({
-            message: "Success Activation User",
-            data: user,
-        });
-
+        response.success(res, user, "user successfully activated");
         } catch (error) {
-            const err = error as unknown as Error;
-
-        res.status(400).json({
-            message: err.message,
-            data: null,
-        });
+        response.error(res, error, "user failed activated");
         }
     }
 };
