@@ -38,7 +38,7 @@ export default {
 
      response.pagination(res, result, {
         total: count,
-        totalPage: Math.ceil(count/limit),
+        totalPages: Math.ceil(count/limit),
         current: page,
      },"success find all category");
         } catch (error) {
