@@ -4,18 +4,18 @@ import uploader from "../utils/uploader";
 import response from "../utils/response";
 
 export default {
-    async single(req: IReqUser, res: Response) {
+async single(req: IReqUser, res: Response) {
+  if (!req.file) {
+    return response.error(res, null, "No file uploaded");
+  }
 
-        if(!req.file ) {
-            response.error(res, null, "No file uploaded");
-        }
-
-        try {
-            const result = await uploader.uploadSingle(req.file as Express.Multer.File);
-            response.success(res, result, "success upload a file");
-        } catch {
-            response.error(res, null, " failed upload file");
-        }
+  try {
+        const result = await uploader.uploadSingle(req.file as Express.Multer.File);
+        return response.success(res, result, "Success upload a file");
+    } catch (error) {
+        console.error("Upload file error:", error);
+        return response.error(res, null, "Failed to upload file");
+    }
     },
     async multiple(req: IReqUser, res: Response) {
                 if(!req.files || req.files.length == 0 ) {
