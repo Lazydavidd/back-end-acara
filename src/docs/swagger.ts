@@ -28,8 +28,8 @@ const doc = {
 
         schemas: {
             LoginRequest: {
-                identifier: "dafaraihan",
-                password: "dafaraihan12",
+                identifier: "Dafaraihan123",
+                password: "Dafaraihan12",
             },
             RegisterRequest: {
             fullName: "dama akbar",
@@ -47,18 +47,20 @@ const doc = {
                 icon: "",
             },
             CreateEventRequest: {
-  "name": "",
-  "banner": "fileUrl",
-  "category": "category ObjectID",
-  "description": "",
-  "startDate": "yyyy-mm-dd hh:mm:ss",
-  "endDate": "yyyy-mm-dd hh:mm:ss",
-  "location": {
-    "region": "region id",
-    "coordinates": [0, 0]
+        name: "",
+        banner: "fileUrl",
+        category: "category ObjectID",
+        description: "",
+        startDate: "yyyy-mm-dd hh:mm:ss",
+        endDate: "yyyy-mm-dd hh:mm:ss",
+        location: {
+            region: "region id",
+            coordinates: [0, 0],
+            address: "",
   },
-  "isOnline": false,
-  "isFeatured": false,
+    isOnline: false,
+    isFeatured: false,
+    isPublish: false,
 },
             RemoveMediaRequest: {
                 fileUrl: "",
