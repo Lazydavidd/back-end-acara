@@ -129,14 +129,40 @@
     },
     "/tickets": {
       "post": {
+        "tags": [
+          "Tickets"
+        ],
         "description": "",
         "responses": {
           "default": {
             "description": ""
           }
+        },
+        "security": [
+          {
+            "bearerAuth": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTicketRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTicketRequest"
+              }
+            }
+          }
         }
       },
       "get": {
+        "tags": [
+          "Tickets"
+        ],
         "description": "",
         "parameters": [
           {
@@ -170,6 +196,9 @@
     },
     "/tickets/{id}": {
       "get": {
+        "tags": [
+          "Tickets"
+        ],
         "description": "",
         "parameters": [
           {
@@ -188,6 +217,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Tickets"
+        ],
         "description": "",
         "parameters": [
           {
@@ -202,10 +234,33 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTicketRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTicketRequest"
+              }
+            }
           }
         }
       },
       "delete": {
+        "tags": [
+          "Tickets"
+        ],
         "description": "",
         "parameters": [
           {
@@ -221,11 +276,19 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": {}
+          }
+        ]
       }
     },
     "/tickets/{eventId}/events": {
       "get": {
+        "tags": [
+          "Tickets"
+        ],
         "description": "",
         "parameters": [
           {
@@ -246,14 +309,40 @@
     },
     "/banners": {
       "post": {
+        "tags": [
+          "Banners"
+        ],
         "description": "",
         "responses": {
           "default": {
             "description": ""
           }
+        },
+        "security": [
+          {
+            "bearerAuth": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBannerRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBannerRequest"
+              }
+            }
+          }
         }
       },
       "get": {
+        "tags": [
+          "Banners"
+        ],
         "description": "",
         "parameters": [
           {
@@ -287,6 +376,9 @@
     },
     "/banners/{id}": {
       "get": {
+        "tags": [
+          "Banners"
+        ],
         "description": "",
         "parameters": [
           {
@@ -305,6 +397,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Banners"
+        ],
         "description": "",
         "parameters": [
           {
@@ -319,10 +414,33 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBannerRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBannerRequest"
+              }
+            }
           }
         }
       },
       "delete": {
+        "tags": [
+          "Banners"
+        ],
         "description": "",
         "parameters": [
           {
@@ -338,7 +456,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": {}
+          }
+        ]
       }
     },
     "/category": {
@@ -1101,6 +1224,54 @@
         },
         "xml": {
           "name": "RemoveMediaRequest"
+        }
+      },
+      "CreateBannerRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Banner 2"
+          },
+          "image": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/djutyqrbj/image/upload/v1751882386/pzv9d69l5ykzdyagmgro.png"
+          },
+          "isShow": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "xml": {
+          "name": "CreateBannerRequest"
+        }
+      },
+      "CreateTicketRequest": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "example": 1000
+          },
+          "name": {
+            "type": "string",
+            "example": "Ticket Reguler"
+          },
+          "events": {
+            "type": "string",
+            "example": "6868d3715c2e2b6cb92fe25e"
+          },
+          "description": {
+            "type": "string",
+            "example": "Ticket Reguler - DESC"
+          },
+          "quantity": {
+            "type": "number",
+            "example": 100
+          }
+        },
+        "xml": {
+          "name": "CreateTicketRequest"
         }
       }
     }
