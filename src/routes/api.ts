@@ -138,7 +138,7 @@ router.put(
 
 router.post(
   "/orders",
-  [authMiddleware, aclMiddleware([ROLES.MEMBER, ROLES.MEMBER])],
+  [authMiddleware, aclMiddleware([ROLES.MEMBER, ROLES.ADMIN])],
   orderController.create
   /*
   #swagger.tags = ['Order']
