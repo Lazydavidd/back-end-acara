@@ -14,24 +14,6 @@ import bannerController from "../controllers/banner.controller";
 import orderController from "../controllers/order.controller";
 
 const router = express.Router();
-//notify
-router.post(
-  "/payment/notify",
-  orderController.notify
-  /*
-  #swagger.tags = ['Payment']
-  #swagger.requestBody = {
-    required: true,
-    content: {
-      "application/json": {
-        schema: {
-          type: "object"
-        }
-      }
-    }
-  }
-  */
-);
 
 router.post(
   "/auth/register",

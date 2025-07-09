@@ -289,35 +289,4 @@ export default {
       response.error(res, error, "failed to remove an order");
     }
   },
-  ////notify
-  async notify(req: any, res: Response) {
-  try {
-    const notification = req.body;
-
-    const orderId = notification.order_id;
-    const transactionStatus = notification.transaction_status;
-
-    let newStatus: OrderStatus = OrderStatus.PENDING;
-
-    // Map dari Midtrans status ke order status
-    if (["capture", "settlement"].includes(transactionStatus)) {
-      newStatus = OrderStatus.COMPLETED;
-    } else if (["cancel", "deny", "expire"].includes(transactionStatus)) {
-      newStatus = OrderStatus.CANCELLED;
-    }
-
-    const order = await OrderModel.findOneAndUpdate(
-      { orderId },
-      { status: newStatus },
-      { new: true }
-    );
-
-    if (!order) return response.notFound(res, "order not found");
-
-    res.status(200).json({ message: "Order updated", status: newStatus });
-  } catch (error) {
-    console.error("Midtrans notification error:", error);
-    res.status(500).json({ message: "Failed to handle notification" });
-  }
-}
 };
